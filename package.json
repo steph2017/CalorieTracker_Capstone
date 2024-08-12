@@ -2,6 +2,7 @@
   "name": "ogwo_stephanie_calorietracker_capstone",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "client": "npm run dev --prefix frontend",
     "server:dev": "nodemon backend/server.js",
