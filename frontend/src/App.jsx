@@ -1,36 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+import { Route, Routes } from "react-router-dom";
 import './App.css'
+
+//Pages
+import AddNew from './pages/AddNew';
+import ExpandedLog from './pages/ExpandedLog';
+import LoggedInAs from './pages/LoggedInAs';
+import ViewEdit from './pages/ViewEdit';
+
+//Components
+import Navbar from './components/Navbar';
 
 function App() {
   const apiUrl = process.env.VITE_API_URL;
   const apiKey = process.env.VITE_API_KEY;
 
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState("");
 
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<ExpandedLog />} />
+          <Route path="/add/log" element={<AddNew />} />
+          <Route path="/add/user" element={<AddNew />} />
+          <Route path="/add/food" element={<AddNew />} />
+          <Route path="/view/food" element={<ViewEdit />} />
+          <Route path="/edit/food" element={<ViewEdit />} />
+          <Route path="/view/log" element={<ViewEdit />} />
+          <Route path="/edit/log" element={<ViewEdit />} />
+          <Route path="/view/user" element={<ViewEdit />} />
+          <Route path="/edit/user" element={<ViewEdit />} />
+          <Route path="/selectuser" element={<LoggedInAs />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
