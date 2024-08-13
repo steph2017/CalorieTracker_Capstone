@@ -16,5 +16,10 @@ export default defineConfig(({ mode }) => {
         VITE_API_KEY: env.VITE_API_KEY,
       },
     },
+    build: {
+      rollupOptions: {
+        external: ['bootstrap/dist/css/bootstrap.min.css'],
+      },
+    },
   };
 });
