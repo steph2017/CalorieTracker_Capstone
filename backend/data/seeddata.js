@@ -34,7 +34,6 @@ export default async function seedData(User, Food, Log) {
 
         // Filter existing users by username
         const newFoods = foodsdata.filter(food => !existingNames.includes(food.name));
-        console.log(newFoods);
         if (newFoods.length > 0) {
             await Food.insertMany(newFoods);
             console.log('Sample food data seeded successfully');

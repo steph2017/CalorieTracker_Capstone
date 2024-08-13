@@ -3,10 +3,10 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: './backend/.env' });
 
 const PORT = process.env.PORT || 10000;
-const MONGOURL = process.env.MONGOURL;
+const MONGOURL = process.env.MONGO_URL;
 const baseURL = '' //will add once project is successfully deployed
 const app = express();
 
