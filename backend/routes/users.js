@@ -46,7 +46,7 @@ router.get("/", async (req, res) => {
     try {
         if (req.query.id) {
             const result = await User.findOne({ id: Number(req.query.id) });
-            if (result) res.send(result);
+            if (result) res.json(result);
             else res.status(404).send("Not found");
         }
         else {
@@ -62,7 +62,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const result = await User.findOne({ id: Number(req.params.id) });
-        result ? res.send(result) : res.status(404).send("Not found");
+        result ? res.json(result) : res.status(404).send("Not found");
     } catch (error) {
         res.status(500).send("Server error");
     }
@@ -74,7 +74,7 @@ router.delete("/:id/delete", async (req, res) => {
         const result = await User.findOneAndDelete({ id: Number(req.params.id) });
 
         res.setHeader('Content-Type', 'text/plain');
-        result ? res.send(result) : res.status(404).send("User not found");
+        result ? res.json(result) : res.status(404).send("User not found");
     } catch (error) {
         res.status(500).send("Server error");
     }
@@ -106,7 +106,7 @@ router.patch("/:id/edit", async (req, res) => {
         await result.findLogs(logs);
 
         res.setHeader('Content-Type', 'text/plain');
-        result ? res.send(result) : res.status(404).send("User not found");
+        result ? res.json(result) : res.status(404).send("User not found");
     } catch (error) {
         res.status(500).send("Server error");
     }

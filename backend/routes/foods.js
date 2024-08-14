@@ -26,7 +26,7 @@ router.post("/added", async (req, res) => {
 
         await newFood.save();
 
-        res.send(newFood);
+        res.json(newFood);
 
 
     } catch (err) {
@@ -40,12 +40,12 @@ router.get("/", async (req, res) => {
     try {
         if (req.query.id) {
             const result = await Food.findOne({ id: Number(req.query.id) });
-            if (result) res.send(result);
+            if (result) res.json(result);
             else res.status(404).send("Not found");
         }
         else {
             const foods = await Food.find();
-            res.send(foods);
+            res.json(foods);
         }
     } catch (error) {
         res.status(500).send("Server error");
@@ -56,7 +56,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const result = await Food.findOne({ id: Number(req.params.id) });
-        result ? res.send(result) : res.status(404).send("Not found");
+        result ? res.json(result) : res.status(404).send("Not found");
     } catch (error) {
         res.status(500).send("Server error");
     }
@@ -67,7 +67,7 @@ router.delete("/:id/delete", async (req, res) => {
     try {
         const result = await Food.findOneAndDelete({ id: Number(req.params.id) });
 
-        result ? res.send(result) : res.status(404).send("Food not found");
+        result ? res.json(result) : res.status(404).send("Food not found");
     } catch (error) {
         res.status(500).send("Server error");
     }
@@ -93,7 +93,7 @@ router.patch("/:id/edit", async (req, res) => {
             { new: true } // return the updated document not the old one
         );
         res.setHeader('Content-Type', 'text/plain');
-        result ? res.send(result) : res.status(404).send("Food not found");
+        result ? res.json(result) : res.status(404).send("Food not found");
     } catch (error) {
         res.status(500).send("Server error");
     }

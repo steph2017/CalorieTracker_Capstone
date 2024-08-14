@@ -43,6 +43,28 @@ router.post("/added", async (req, res) => {
     }
 });
 
+//POST expanded logs
+router.get("/expand", async (req, res) => {
+    try {
+        const logs = await Log.find();
+
+        // query food schema for each log and insert the Food object by id
+        const populatedLogs = await Promise.all(logs.map(async (log) => {
+            const foods = await Food.find({ id: { $in: log.food_ids } });
+
+            return {
+                ...log._doc,
+                food_ids: foods
+            };
+        }));
+
+        res.json(populatedLogs);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
 //get route via search query
 router.get("/", async (req, res) => {
     try {
@@ -53,7 +75,7 @@ router.get("/", async (req, res) => {
         }
         else {
             const logs = await Log.find();
-            res.send(logs);
+            res.json(logs);
         }
     } catch (error) {
         res.status(500).send("Server error");
@@ -64,7 +86,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     try {
         const result = await Log.findOne({ id: Number(req.params.id) });
-        result ? res.send(result) : res.status(404).send("Not found");
+        result ? res.json(result) : res.status(404).send("Not found");
     } catch (error) {
         res.status(500).send("Server error");
     }
@@ -76,7 +98,7 @@ router.delete("/:id/delete", async (req, res) => {
     try {
         const result = await Log.findOneAndDelete({ id: Number(req.params.id) });
 
-        result ? res.send(result) : res.status(404).send("Food not found");
+        result ? res.json(result) : res.status(404).send("Food not found");
     } catch (error) {
         res.status(500).send("Server error");
     }
@@ -108,7 +130,7 @@ router.patch("/:id/edit", async (req, res) => {
         await result.calcMacros(foods, users);
 
         res.setHeader('Content-Type', 'text/plain');
-        result ? res.send(result) : res.status(404).send("Log not found");
+        result ? res.json(result) : res.status(404).send("Log not found");
     } catch (error) {
         res.status(500).send("Server error");
     }
