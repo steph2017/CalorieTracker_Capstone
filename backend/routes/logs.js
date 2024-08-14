@@ -20,7 +20,7 @@ router.post("/added", async (req, res) => {
         const newLog = new Log({
             id: logCount + 1,
             user_id: Number(userid),
-            date: logdate,
+            date: Number(logdate),
             food_ids: numFoodids
 
         });
@@ -43,10 +43,35 @@ router.post("/added", async (req, res) => {
     }
 });
 
-//POST expanded logs
+//GET expanded logs
 router.get("/expand", async (req, res) => {
     try {
         const logs = await Log.find();
+
+        // query food schema for each log and insert the Food object by id
+        const populatedLogs = await Promise.all(logs.map(async (log) => {
+            const foods = await Food.find({ id: { $in: log.food_ids } });
+
+            return {
+                ...log._doc,
+                food_ids: foods
+            };
+        }));
+
+        res.json(populatedLogs);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+//GET expanded logs by username
+router.get("/expand/:user_id", async (req, res) => {
+    try {
+        const { user_id } = req.params;
+
+        // Fetch matchnig logs
+        const logs = await Log.find({ user_id: Number(user_id) });
 
         // query food schema for each log and insert the Food object by id
         const populatedLogs = await Promise.all(logs.map(async (log) => {
@@ -111,7 +136,7 @@ router.patch("/:id/edit", async (req, res) => {
     const updatedFields = {};
 
     if (req.query.user_id) updatedFields.user_id = Number(req.query.user_id);
-    if (req.query.date) updatedFields.date = req.query.date;
+    if (req.query.date) updatedFields.date = Number(req.query.date);
     if (req.query.food_ids) updatedFields.food_ids = req.query.food_ids.map(id => Number(id));
     console.log(updatedFields.food_ids);
 
