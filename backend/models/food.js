@@ -14,6 +14,10 @@ const foodSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    photo_url: {
+        type: String,
+        default: ""
+    },
     cals: {
         type: Number,
         required: true

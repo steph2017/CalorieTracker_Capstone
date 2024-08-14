@@ -9,7 +9,7 @@ router.use(express.urlencoded({ extended: true }));
 //POST route
 router.post("/added", async (req, res) => {
     try {
-        const { food_name, food_desc, food_cals, gCarbs, gProtein, gFat } = req.body;
+        const { food_name, food_desc, photo_url, food_cals, gCarbs, gProtein, gFat } = req.body;
 
         const foodCount = await Food.countDocuments({});
 
@@ -17,6 +17,7 @@ router.post("/added", async (req, res) => {
             id: foodCount + 1,
             name: food_name,
             description: food_desc,
+            photo_url: photo_url,
             cals: Number(food_cals),
             gcarbs: Number(gCarbs),
             gprotein: Number(gProtein),
@@ -79,6 +80,7 @@ router.patch("/:id/edit", async (req, res) => {
 
     if (req.query.name) updatedFields.name = req.query.name;
     if (req.query.description) updatedFields.description = req.query.description;
+    if (req.query.photo_url) updatedFields.photo_url = req.query.photo_url;
     if (req.query.cals) updatedFields.cals = Number(req.query.cals);
     if (req.query.gcarbs) updatedFields.gcarbs = Number(req.query.gcarbs);
     if (req.query.gprotein) updatedFields.gprotein = Number(req.query.gprotein);
