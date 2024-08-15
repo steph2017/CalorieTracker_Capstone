@@ -48,7 +48,8 @@ Frontend (navigate to the frontend folder, then): npm run dev
 - See the presentation video for more!
 
 ## Presentation Video
-[Capstone Presentation]();
+[Capstone Presentation](https://www.loom.com/share/75077e7a40ba4427af3881dcb1f7c2e3)
+[Slides](https://www.canva.com/design/DAGNrQ46Vzc/KsTg6Tai-NcL1nSRnQOO9A/view?utm_content=DAGNrQ46Vzc&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 
 
 ## Acknowledgements
