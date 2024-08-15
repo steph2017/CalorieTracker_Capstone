@@ -7,7 +7,7 @@ import Food from "../models/food.js";
 router.use(express.urlencoded({ extended: true }));
 
 //POST route
-router.post("/added", async (req, res) => {
+router.post("/add", async (req, res) => {
     try {
         const { food_name, food_desc, photo_url, food_cals, gCarbs, gProtein, gFat } = req.body;
 

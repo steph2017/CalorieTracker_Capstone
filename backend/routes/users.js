@@ -7,9 +7,9 @@ import Log from "../models/log.js";
 router.use(express.urlencoded({ extended: true }));
 
 //POST route - maybe needs refactoring
-router.post("/added", async (req, res) => {
+router.post("/add", async (req, res) => {
     try {
-        const { username, dailycal, gCarbs, gProtein, gFat } = req.body;
+        const { username, photo_url, dailycal, gCarbs, gProtein, gFat } = req.body;
 
         //getting a count of total users in the db to start in order to then assign a user id:
         const userCount = await User.countDocuments({});
@@ -18,6 +18,7 @@ router.post("/added", async (req, res) => {
         const newUser = new User({
             id: userCount + 1,
             username: username,
+            photo_url: photo_url,
             tarCals: Number(dailycal),
             tarCarbs: Number(gCarbs),
             tarProtein: Number(gProtein),
@@ -87,6 +88,7 @@ router.patch("/:id/edit", async (req, res) => {
     const updatedFields = {};
 
     if (req.query.username) updatedFields.username = req.query.username;
+    if (req.query.photo_url) updatedFields.photo_url = req.query.photo_url;
     if (req.query.tarCals) updatedFields.tarCals = Number(req.query.tarCals);
     if (req.query.tarCarbs) updatedFields.tarCarbs = Number(req.query.tarCarbs);
     if (req.query.tarProtein) updatedFields.tarProtein = Number(req.query.tarProtein);

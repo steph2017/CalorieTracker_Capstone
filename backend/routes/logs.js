@@ -9,7 +9,7 @@ import User from "../models/user.js";
 router.use(express.urlencoded({ extended: true }));
 
 //POST
-router.post("/added", async (req, res) => {
+router.post("/add", async (req, res) => {
     try {
         const { userid, logdate, foodids } = req.body;
         const newFoodids = foodids.split(',');

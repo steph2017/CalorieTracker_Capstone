@@ -5,9 +5,10 @@ import ExpandedLog from "../components/ExpandedLog";
 import React from 'react'
 
 function LandingPage({ allLogs, setAllLogs, userlogs, users, setUsers, user, setUser, singlelog }) {
-    if (!user || !singlelog) {
+    if (!user || !singlelog || !users) {
         return <div>Loading...</div>;
     }
+    console.log(users);
 
     return (
         <div>

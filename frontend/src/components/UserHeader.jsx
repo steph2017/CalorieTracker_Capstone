@@ -7,7 +7,7 @@ function UserHeader({ user }) {
             <div className="user-header-body">
                 <div className="uh-left-division">
                     <h4>Welcome Back {user.username}!</h4>
-                    <img src={"https://unsplash.com/photos/man-wearing-maroon-v-neck-t-shirt-in-forest-agGIKYs4mYs"} alt={`${user.username}`} className="user-image" />
+                    <img src={user.photo_url} alt={`${user.username}`} className="user-image" />
                 </div>
                 <div className="uh-right-division">
                     <h4>Your Daily Targets</h4>

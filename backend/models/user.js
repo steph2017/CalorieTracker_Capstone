@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    photo_url: {
+        type: String,
+        default: ""
+    },
     tarCals: {
         type: Number,
         required: true

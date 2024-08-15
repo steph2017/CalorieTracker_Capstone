@@ -3,12 +3,6 @@ import { useEffect } from 'react'
 
 function ExpandedLog({ singlelog }) {
 
-    console.log(singlelog);
-    console.log(typeof singlelog.date); // Should be string or number
-    console.log(singlelog.date);
-    console.log(singlelog.food_ids);
-    console.log(Array.isArray(singlelog.food_ids));
-
 
     function formatDate(logDate) {
         const dateStr = logDate.toString();
@@ -26,7 +20,7 @@ function ExpandedLog({ singlelog }) {
         });
     }
 
-    if (!singlelog || !singlelog.metcalTarget || !singlelog.food_ids) {
+    if (!singlelog || !singlelog.food_ids || !singlelog.date) {
         return <div>loading...</div>;
     }
 
@@ -40,7 +34,7 @@ function ExpandedLog({ singlelog }) {
 
     return (
         <div className="expandedlog">
-            <h2>Date of Log: {singlelog.date}</h2>
+            <h2>Date of Log: {formatDate(singlelog.date)}</h2>
             <div className={calsLeftClass}>{singlelog.calsLeft}</div>
             <div>Daily Calories Left</div>
 
@@ -50,10 +44,7 @@ function ExpandedLog({ singlelog }) {
                 <div className="el-card">Protein: {singlelog.tgProtein}g</div>
                 <div className="el-card">Fat: {singlelog.tgFat}g</div>
             </div>
-            {/* <div className="food-card-container">
-                {String(singlelog.food_ids)}
-            </div> */}
-
+            <h2>Your Foods!</h2>
             <div className="food-card-container">
                 {singlelog.food_ids.map((food, index) => (
                     <div key={index} className="food-card">
