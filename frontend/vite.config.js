@@ -7,14 +7,7 @@ import { loadEnv } from 'vite';
 export default defineConfig(({ mode }) => {
 
   const env = loadEnv(mode, process.cwd());
-
   return {
     plugins: [react()],
-    define: {
-      'process.env': {
-        VITE_API_URL: env.VITE_API_URL,
-        VITE_API_HOMEURL: env.VITE_API_HOMEURL,
-      },
-    },
   };
 });

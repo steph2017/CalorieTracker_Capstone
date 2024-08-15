@@ -4,7 +4,7 @@ import './App.css'
 
 //Pages
 import AddNew from './pages/AddNew';
-import ExpandedLog from './pages/ExpandedLog';
+import LandingPage from './pages/LandingPage';
 import LoggedInAs from './pages/LoggedInAs';
 import ViewEdit from './pages/ViewEdit';
 
@@ -12,48 +12,56 @@ import ViewEdit from './pages/ViewEdit';
 import Navbar from './components/Navbar';
 
 function App() {
-  const apiUrl = process.env.VITE_API_URL;
-  const apiHomeUrl = process.env.VITE_API_HOMEURL;
+  // const apiUrl = import.meta.env.VITE_API_URL; - couldn't get .env set up for frontend so im hardcoding the values
+  // const apiHomeUrl = import.meta.env.VITE_API_HOMEURL;
+
+  const apiUrl = "https://calorietracker-capstone.onrender.com"
+  const apiHomeUrl = "http://localhost:2222"
 
 
   const [users, setUsers] = useState([]);
   const [logs, setLogs] = useState([]);
   const [user, setUser] = useState({});
 
-  const usersDataSet = [];
-  const userInfo = {};
+  const allLogs = [];
+  const allUsers = [];
 
   useEffect(() => {
     const initialFetch = async () => {
       try {
+        console.log(apiUrl);
+        console.log(apiHomeUrl);
+        // const usersResponse = await fetch(`${apiUrl}/users`);
+        // const logsResponse = await fetch(`${apiUrl}/logs/expand`);
         const usersResponse = await fetch(`${apiHomeUrl}/users`);
         const logsResponse = await fetch(`${apiHomeUrl}/logs/expand`);
         console.log(usersResponse);
 
-        const usersData = await usersResponse.json();
-        const logsData = await logsResponse.json();
+        allUsers = await usersResponse.json();
 
-        setUsers(usersData);
-        setLogs(logsData);
+        allLogs = await logsResponse.json();
 
-        const latestUser = usersData.reduce((prev, current) => (prev.id > current.id ? prev : current));
+        setUsers(allUsers);
+
+        const latestUser = allUsers.reduce((prev, current) => (prev.id > current.id ? prev : current));
         setUser(latestUser);
+
+        const latestLogofUser = allLogs.filter(log => log.user_id === latestUser);
+        setLogs(latestLogofUser);
+
       } catch (error) {
         console.error("Error fetching users and logs:", error);
       }
     };
     initialFetch();
   }, [apiHomeUrl]);
-  useEffect(() => {
-    console.log('Users updated:', users);
-    console.log('User updated:', user);
-  }, [users, user]);
+  //}, [apiUrl]);
   return (
     <>
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<ExpandedLog users={users} logs={logs} user={user} setUser={setUser} />} />
+          <Route path="/" element={<LandingPage allLogs={allLogs} allUsers={allUsers} logs={logs} user={user} setUser={setUser} setLogs={setLogs} />} />
           <Route path="/add/log" element={<AddNew />} />
           <Route path="/add/user" element={<AddNew />} />
           <Route path="/add/food" element={<AddNew />} />

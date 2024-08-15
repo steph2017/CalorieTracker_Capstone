@@ -21,14 +21,14 @@
   align-items: center;
 }
 
-.left-division {
+.uh-left-division {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.right-division {
+.uh-right-division {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,4 +53,56 @@
   border-radius: 10px;
   padding: 10px;
   text-align: center;
+}
+
+
+.cals-left {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.cl-red {
+  color: red
+}
+
+.cl-green {
+  color: green
+}
+
+.cl-purple {
+  color: purple
+}
+
+.expandedlog {}
+
+.el-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.el-card {
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.food-card-container {}
+
+.food-card {
+  display: flex;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.food-card-left {
+  margin-right: 20px;
+}
+
+.food-card-right {
+  flex-grow: 1;
 }

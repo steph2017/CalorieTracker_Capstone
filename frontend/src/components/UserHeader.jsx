@@ -5,11 +5,11 @@ function UserHeader({ user }) {
     return (
         <div className="user-header-card">
             <div className="user-header-body">
-                <div className="left-division">
+                <div className="uh-left-division">
                     <h4>Welcome Back {user.username}!</h4>
                     <img src={"https://unsplash.com/photos/man-wearing-maroon-v-neck-t-shirt-in-forest-agGIKYs4mYs"} alt={`${user.username}`} className="user-image" />
                 </div>
-                <div className="right-division">
+                <div className="uh-right-division">
                     <h4>Your Daily Targets</h4>
                     <div className="target-grid">
                         <div className="target-square">Total Calories: {user.tarCals}</div>
