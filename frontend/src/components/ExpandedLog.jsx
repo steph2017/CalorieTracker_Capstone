@@ -26,7 +26,7 @@ function ExpandedLog({ singlelog }) {
         });
     }
 
-    if (!singlelog) {
+    if (!singlelog || !singlelog.metcalTarget || !singlelog.food_ids) {
         return <div>loading...</div>;
     }
 

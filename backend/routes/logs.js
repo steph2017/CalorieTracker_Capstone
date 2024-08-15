@@ -50,7 +50,9 @@ router.get("/expand", async (req, res) => {
 
         // query food schema for each log and insert the Food object by id
         const populatedLogs = await Promise.all(logs.map(async (log) => {
-            const foods = await Food.find({ id: { $in: log.food_ids } });
+            const foods = await Promise.all(log.food_ids.map(async (foodId) => {
+                return Food.findOne({ id: foodId });
+            }));
 
             return {
                 ...log._doc,
@@ -75,7 +77,9 @@ router.get("/expand/:user_id", async (req, res) => {
 
         // query food schema for each log and insert the Food object by id
         const populatedLogs = await Promise.all(logs.map(async (log) => {
-            const foods = await Food.find({ id: { $in: log.food_ids } });
+            const foods = await Promise.all(log.food_ids.map(async (foodId) => {
+                return Food.findOne({ id: foodId });
+            }));
 
             return {
                 ...log._doc,

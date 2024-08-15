@@ -4,7 +4,8 @@ const logSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
+        index: 1
     },
     user_id: {
         type: Number,
@@ -12,7 +13,8 @@ const logSchema = new mongoose.Schema({
     },
     date: {
         type: Number,
-        required: true
+        required: true,
+        index: 1
     },
     food_ids: {
         type: [Number],
