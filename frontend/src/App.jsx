@@ -13,17 +13,22 @@ import Navbar from './components/Navbar';
 
 function App() {
   const apiUrl = process.env.VITE_API_URL;
-  const apiKey = process.env.VITE_API_KEY;
+  const apiHomeUrl = process.env.VITE_API_HOMEURL;
 
 
+  const [users, setUsers] = useState([]);
   const [logs, setLogs] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
+
+  const usersDataSet = [];
+  const userInfo = {};
 
   useEffect(() => {
     const initialFetch = async () => {
       try {
-        const usersResponse = await fetch(`${apiUrl}/users`);
-        const logsResponse = await fetch(`${apiUrl}/logs/expand`);
+        const usersResponse = await fetch(`${apiHomeUrl}/users`);
+        const logsResponse = await fetch(`${apiHomeUrl}/logs/expand`);
+        console.log(usersResponse);
 
         const usersData = await usersResponse.json();
         const logsData = await logsResponse.json();
@@ -37,9 +42,12 @@ function App() {
         console.error("Error fetching users and logs:", error);
       }
     };
-    fetchUsersAndLogs();
-  }, [apiUrl]);
-
+    initialFetch();
+  }, [apiHomeUrl]);
+  useEffect(() => {
+    console.log('Users updated:', users);
+    console.log('User updated:', user);
+  }, [users, user]);
   return (
     <>
       <div>

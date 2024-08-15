@@ -1,7 +1,7 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -11,21 +11,27 @@
   background-color: burlywood;
   border: 1px solid #ddd;
   border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
 }
 
 .user-header-body {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .left-division {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .right-division {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .user-image {
@@ -37,9 +43,14 @@
 
 .target-grid {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .target-square {
   background-color: blueviolet;
   border-radius: 10px;
+  padding: 10px;
+  text-align: center;
 }

@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env': {
         VITE_API_URL: env.VITE_API_URL,
-        VITE_API_KEY: env.VITE_API_KEY,
+        VITE_API_HOMEURL: env.VITE_API_HOMEURL,
       },
     },
   };
