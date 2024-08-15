@@ -36,13 +36,13 @@ Frontend (navigate to the frontend folder, then): npm run dev
 ## Features
 
 - Seamless navigation via React Router
-<img width="400" alt="image" src="./utilities/landingpage.png">
+<img width="250" alt="image" src="./utilities/changeusers.png.png">
 
 - UseEffect is used to populate the Landing Page with the latest added log by the latest added User
-<img width="500" alt="image" src="./utilities/SEED.png">
+<img width="500" alt="image" src="./utilities/landingpage.png">
 
 - Admin user is able to switch users then be automatically redirected to the Landing Page with Log data responsive to the selected User.
-<img width="400" alt="image" src="./utilities/POST.png">
+<img width="500" alt="image" src="./utilities/changestate.png">
 
   
 - See the presentation video for more!
@@ -56,3 +56,4 @@ Frontend (navigate to the frontend folder, then): npm run dev
 This was made possible by:
 - Instruction from [Tishana](https://github.com/tishana) and [Manara](https://github.com/Manara-Ali) under the [Per Scholas Software Engineering Immersive]https://perscholas.org/courses/software-engineer/
 - I used build scripts by [Manara](https://github.com/Manara-Ali) in order to have both frontend and backend deploy while within one overall project folder.
+- Miro for wireframing! [My Board]()
