@@ -127,7 +127,7 @@ function calculateMacros(logs) {
         const tgCarbs = foodItems.reduce((acc, food) => acc + food.gcarbs, 0);
         const tgProtein = foodItems.reduce((acc, food) => acc + food.gprotein, 0);
         const tgFat = foodItems.reduce((acc, food) => acc + food.gfat, 0);
-        const metcalTarget = user.tarCals > tCals ? false : true;
+        const metcalTarget = tCals >= user.tarCals && tCals <= user.tarCals * 1.10;
         const calsLeft = user.tarCals - tCals;
 
         log.tCals = tCals;

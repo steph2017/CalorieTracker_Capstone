@@ -54,7 +54,7 @@ logSchema.methods.calcMacros = async function (foods, users) {
     this.tgCarbs = foodItems.reduce((acc, food) => acc + food.gcarbs, 0);
     this.tgProtein = foodItems.reduce((acc, food) => acc + food.gprotein, 0);
     this.tgFat = foodItems.reduce((acc, food) => acc + food.gfat, 0);
-    this.metcalTarget = user.tarCals > this.tCals ? false : true;
+    this.metcalTarget = this.tCals >= user.tarCals && this.tCals <= user.tarCals * 1.10;
     this.calsLeft = user.tarCals - this.tCals;
 
     await this.save();

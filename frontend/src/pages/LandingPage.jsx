@@ -4,15 +4,15 @@ import ExpandedLog from "../components/ExpandedLog";
 
 import React from 'react'
 
-function LandingPage({ allUsers, user, allLogs, logs, setUser, setLogs }) {
-    if (!user) {
+function LandingPage({ allLogs, setAllLogs, userlogs, users, setUsers, user, setUser, singlelog }) {
+    if (!user || !singlelog) {
         return <div>Loading...</div>;
     }
 
     return (
         <div>
-            <UserHeader allLogs={allLogs} allUsers={allUsers} logs={logs} user={user} setUser={setUser} setLogs={setLogs} />
-            <ExpandedLog allLogs={allLogs} allUsers={allUsers} logs={logs} user={user} setUser={setUser} setLogs={setLogs} />
+            <UserHeader allLogs={allLogs} setAllLogs={setAllLogs} userlogs={userlogs} users={users} setUsers={setUsers} user={user} setUser={setUser} singlelog={singlelog} />
+            <ExpandedLog allLogs={allLogs} setAllLogs={setAllLogs} userlogs={userlogs} users={users} setUsers={setUsers} user={user} setUser={setUser} singlelog={singlelog} />
         </div>
     )
 }

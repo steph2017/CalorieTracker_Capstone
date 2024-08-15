@@ -20,34 +20,38 @@ function App() {
 
 
   const [users, setUsers] = useState([]);
-  const [logs, setLogs] = useState([]);
   const [user, setUser] = useState({});
+  const [allLogs, setAllLogs] = useState([]);
+  const [userlogs, setUserLogs] = useState([]);
+  const [singlelog, setLog] = useState({});
 
-  const allLogs = [];
-  const allUsers = [];
 
   useEffect(() => {
     const initialFetch = async () => {
       try {
-        console.log(apiUrl);
-        console.log(apiHomeUrl);
         // const usersResponse = await fetch(`${apiUrl}/users`);
         // const logsResponse = await fetch(`${apiUrl}/logs/expand`);
         const usersResponse = await fetch(`${apiHomeUrl}/users`);
         const logsResponse = await fetch(`${apiHomeUrl}/logs/expand`);
-        console.log(usersResponse);
 
-        allUsers = await usersResponse.json();
+        const usersdata = await usersResponse.json();
+        const logsdata = await logsResponse.json();
 
-        allLogs = await logsResponse.json();
+        // console.log(usersdata)
+        // console.log(logsdata)
 
-        setUsers(allUsers);
+        setUsers(usersdata);
+        setAllLogs(logsdata);
 
-        const latestUser = allUsers.reduce((prev, current) => (prev.id > current.id ? prev : current));
+        const latestUser = usersdata.reduce((prev, current) => (prev.id > current.id ? prev : current));
         setUser(latestUser);
 
-        const latestLogofUser = allLogs.filter(log => log.user_id === latestUser);
-        setLogs(latestLogofUser);
+        const LogsofUser = logsdata.filter(log => log.user_id === latestUser.id);
+        setUserLogs(LogsofUser);
+
+        const lastLog = LogsofUser.reduce((prev, current) => (prev.date > current.date ? prev : current));
+        setLog(lastLog);
+        console.log(lastLog);
 
       } catch (error) {
         console.error("Error fetching users and logs:", error);
@@ -56,12 +60,13 @@ function App() {
     initialFetch();
   }, [apiHomeUrl]);
   //}, [apiUrl]);
+
   return (
     <>
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<LandingPage allLogs={allLogs} allUsers={allUsers} logs={logs} user={user} setUser={setUser} setLogs={setLogs} />} />
+          <Route path="/" element={<LandingPage allLogs={allLogs} setAllLogs={setAllLogs} userlogs={userlogs} users={users} setUsers={setUsers} user={user} setUser={setUser} singlelog={singlelog} />} />
           <Route path="/add/log" element={<AddNew />} />
           <Route path="/add/user" element={<AddNew />} />
           <Route path="/add/food" element={<AddNew />} />

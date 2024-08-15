@@ -1,7 +1,14 @@
 import React from 'react'
 import { useEffect } from 'react'
 
-function ExpandedLog({ allUsers, user, allLogs, logs, setUser, setLogs }) {
+function ExpandedLog({ singlelog }) {
+
+    console.log(singlelog);
+    console.log(typeof singlelog.date); // Should be string or number
+    console.log(singlelog.date);
+    console.log(singlelog.food_ids);
+    console.log(Array.isArray(singlelog.food_ids));
+
 
     function formatDate(logDate) {
         const dateStr = logDate.toString();
@@ -19,9 +26,13 @@ function ExpandedLog({ allUsers, user, allLogs, logs, setUser, setLogs }) {
         });
     }
 
+    if (!singlelog) {
+        return <div>loading...</div>;
+    }
+
     let calsLeftClass = 'cals-left';
-    if (!logs.metcalTarget) {
-        calsLeftClass += logs.calsLeft < 0 ? ' cl-red' : ' cl-purple';
+    if (!singlelog.metcalTarget) {
+        calsLeftClass += singlelog.calsLeft < 0 ? ' cl-red' : ' cl-purple';
     } else {
         calsLeftClass += ' cl-green';
     }
@@ -29,18 +40,22 @@ function ExpandedLog({ allUsers, user, allLogs, logs, setUser, setLogs }) {
 
     return (
         <div className="expandedlog">
-            <h2>Date of Log: {formatDate(logs.date)}</h2>
-            <div className={calsLeftClass}>{logs.calsLeft}</div>
+            <h2>Date of Log: {singlelog.date}</h2>
+            <div className={calsLeftClass}>{singlelog.calsLeft}</div>
             <div>Daily Calories Left</div>
 
             <div className="el-container">
-                <div className="el-card">Total Calories: {logs.tCals}</div>
-                <div className="el-card">Carbs: {logs.tgCarbs}g</div>
-                <div className="el-card">Protein: {logs.tgProtein}g</div>
-                <div className="el-card">Fat: {logs.tgFat}g</div>
+                <div className="el-card">Total Calories: {singlelog.tCals}</div>
+                <div className="el-card">Carbs: {singlelog.tgCarbs}g</div>
+                <div className="el-card">Protein: {singlelog.tgProtein}g</div>
+                <div className="el-card">Fat: {singlelog.tgFat}g</div>
             </div>
+            {/* <div className="food-card-container">
+                {String(singlelog.food_ids)}
+            </div> */}
+
             <div className="food-card-container">
-                {logs.food_ids.map((food, index) => (
+                {singlelog.food_ids.map((food, index) => (
                     <div key={index} className="food-card">
                         <div className="food-card-left">
                             <img src={food.photo_url} alt={food.name} style={{ width: '100px', height: '100px', borderRadius: '8px' }} />
@@ -54,6 +69,7 @@ function ExpandedLog({ allUsers, user, allLogs, logs, setUser, setLogs }) {
                 ))}
             </div>
         </div>
+        // <div>deleteme</div>
     );
 }
 
