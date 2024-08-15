@@ -59,7 +59,7 @@ function App() {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<LandingPage allLogs={allLogs} setAllLogs={setAllLogs} userlogs={userlogs} users={users} setUsers={setUsers} user={user} setUser={setUser} singlelog={singlelog} />} />
+          <Route path="/" element={<LandingPage allLogs={allLogs} setAllLogs={setAllLogs} userlogs={userlogs} users={users} setUsers={setUsers} user={user} setUser={setUser} singlelog={singlelog} setLog={setLog} />} />
           <Route path="/add/log" element={<AddNew />} />
           <Route path="/add/user" element={<AddNew />} />
           <Route path="/add/food" element={<AddNew />} />
@@ -69,7 +69,7 @@ function App() {
           <Route path="/edit/log" element={<ViewEdit />} />
           <Route path="/view/user" element={<ViewEdit />} />
           <Route path="/edit/user" element={<ViewEdit />} />
-          <Route path="/selectuser" element={<LoggedInAs allLogs={allLogs} setAllLogs={setAllLogs} userlogs={userlogs} users={users} setUsers={setUsers} user={user} setUser={setUser} singlelog={singlelog} />} />
+          <Route path="/selectuser" element={<LoggedInAs allLogs={allLogs} setAllLogs={setAllLogs} userlogs={userlogs} setUserLogs={setUserLogs} users={users} setUsers={setUsers} user={user} setUser={setUser} singlelog={singlelog} setLog={setLog} />} />
         </Routes>
       </div>
     </>

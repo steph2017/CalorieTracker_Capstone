@@ -73,7 +73,7 @@
   color: purple
 }
 
-.expandedlog {}
+/* .expandedlog {} */
 
 .el-container {
   display: grid;
@@ -90,7 +90,7 @@
   color: brown;
 }
 
-.food-card-container {}
+/* .food-card-container {} */
 
 .food-card {
   display: flex;
@@ -120,4 +120,22 @@
 
 .navbar a:hover {
   color: darkred;
+}
+
+.logged-in-as {
+  background-color: burlywood;
+}
+
+.lia-header {
+  text-align: center;
+}
+
+.lia-dropdown {
+  display: block;
+  margin: 10px auto
+}
+
+.lia-save-button {
+  display: block;
+  margin: 10px auto;
 }
