@@ -36,7 +36,7 @@ Frontend (navigate to the frontend folder, then): npm run dev
 ## Features
 
 - Seamless navigation via React Router
-<img width="250" alt="image" src="./utilities/changeusers.png.png">
+<img width="250" alt="image" src="./utilities/changeusers.png">
 
 - UseEffect is used to populate the Landing Page with the latest added log by the latest added User
 <img width="500" alt="image" src="./utilities/landingpage.png">
